@@ -97,6 +97,7 @@
 }
 
 // 📱 MENÚ INFERIOR (móvil, estilo imagen y colores institucionales)
+// 📱 MENÚ INFERIOR (móvil, estilo imagen y colores institucionales)
 .menu-inferior {
   display: flex;
   justify-content: center;
@@ -111,7 +112,7 @@
   border-radius: 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   z-index: 100;
-  overflow: visible; // Permite que los elementos floten fuera
+  overflow: visible;
 
   ul {
     display: flex;
@@ -133,21 +134,31 @@
     cursor: pointer;
     z-index: 101;
 
+    // Estilos generales para íconos y SVGs
     .icono-material,
     .icono-svg {
-      font-size: 24px;
-      width: 24px;
-      height: 24px;
+      font-size: 26px;
+      width: 26px;
+      height: 26px;
       color: $color-blanco;
-      filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.3));
+      fill: $color-blanco;
+      stroke: $color-blanco;
+      filter: brightness(0) invert(1) drop-shadow(0 0 1px rgba(255, 255, 255, 0.3));
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+      // Compatibilidad con <svg> inline
+      path,
+      use,
+      g {
+        fill: $color-blanco;
+        stroke: $color-blanco;
+      }
     }
 
     &.activo:not(.centro) {
       transform: translateY(-15px);
       transition: transform 0.3s ease;
 
-      // Mantengo EXACTAMENTE tu curvatura blanca original
       &::after {
         content: '';
         position: absolute;
@@ -161,7 +172,6 @@
         z-index: 0;
       }
 
-      // Círculo dorado con mejoras visuales pero misma posición/tamaño
       &::before {
         content: '';
         position: absolute;
@@ -187,8 +197,17 @@
         position: relative;
         z-index: 2;
         color: $color-primario;
+        fill: $color-primario;
+        stroke: $color-primario;
         filter: none;
         transform: scale(1.15);
+
+        path,
+        use,
+        g {
+          fill: $color-primario;
+          stroke: $color-primario;
+        }
       }
     }
 
@@ -214,7 +233,16 @@
         height: 28px;
         font-size: 28px;
         color: $color-primario;
+        fill: $color-primario;
+        stroke: $color-primario;
         filter: none;
+
+        path,
+        use,
+        g {
+          fill: $color-primario;
+          stroke: $color-primario;
+        }
       }
 
       &:active {
@@ -222,7 +250,6 @@
       }
     }
 
-    // Efecto sutil al interactuar
     &:not(.centro):hover {
       .icono-material,
       .icono-svg {
