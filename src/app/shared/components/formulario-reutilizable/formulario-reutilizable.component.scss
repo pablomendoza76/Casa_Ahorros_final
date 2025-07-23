@@ -1,0 +1,103 @@
+@use '../../../shared/catalogo/colores.scss' as *;
+@use '../../../shared/catalogo/tipografia.scss' as *;
+
+.titulo {
+  text-align: center;
+  font-size: $titulo-principal;
+  font-weight: $fuente-bold;
+  color: $color-primario;
+  margin-bottom: 1.7rem;
+}
+
+.formulario {
+  display: flex;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-family: $fuente-principal;
+
+  &.una-columna {
+    flex-direction: column;
+    align-items: center;
+
+    .columna {
+      width: 50%;
+
+      .campo {
+        width: 100%;
+
+        input,
+        select {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  .columna {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    width: 43%;
+
+    .campo {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 0.18rem;
+        font-weight: $fuente-semi;
+        font-size: $texto-label;
+        color: $color-texto-label;
+      }
+
+      input,
+      select {
+        padding: 0.65rem 1rem;
+        border-radius: 0.9rem;
+        border: none;
+        background: $color-gris-claro;
+        font-size: $texto-general;
+        font-family: $fuente-principal;
+
+        &:disabled {
+          background-color: $color-gris-claro;
+          color: $color-gris-oscuro;
+          cursor: not-allowed;
+        }
+      }
+
+      option {
+        background-color: $color-blanco;
+        color: $color-texto-label;
+        font-size: $texto-general;
+        font-family: $fuente-principal;
+      }
+    }
+  }
+
+  .botones {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2.3rem;
+    margin-top: 1.8rem;
+
+    button {
+      background-color: $color-primario;
+      color: $color-blanco;
+      font-weight: $fuente-semi;
+      padding: 0.75rem 2.2rem;
+      border-radius: 2rem;
+      border: none;
+      cursor: pointer;
+      font-size: $texto-general;
+      transition: background 0.2s ease;
+      font-family: $fuente-principal;
+
+      &:hover {
+        background-color: $color-primario-hover;
+      }
+    }
+  }
+}

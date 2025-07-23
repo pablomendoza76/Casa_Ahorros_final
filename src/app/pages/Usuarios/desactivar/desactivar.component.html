@@ -1,0 +1,45 @@
+<div class="actualizar-usuario-container">
+  <!-- Encabezado horizontal con ícono y texto -->
+  <div class="encabezado-horizontal">
+    <img src="/svg/inicio/opciones/management.svg" alt="Gestión de usuarios" />
+    <h1>Gestión de<br />Usuarios</h1>
+  </div>
+
+  <!-- Paso 1: Buscar por cédula -->
+  <div class="panel-formulario" *ngIf="!socioEncontrado">
+    <app-formulario-reutilizable
+      [tituloFormulario]="'Eliminar Socio'"
+      [campos]="camposBusqueda"
+      textoBotonIzquierdo="Buscar"
+      textoBotonDerecho=""
+      (onSubmit)="buscarSocio($event)">
+    </app-formulario-reutilizable>
+  </div>
+
+  <!-- Paso 2: Confirmar desactivación -->
+  <div class="panel-formulario" *ngIf="socioEncontrado">
+    <app-formulario-reutilizable
+      [tituloFormulario]="'Confirmar Eliminación'"
+      [campos]="camposFormularioEdicion"
+      textoBotonIzquierdo="Eliminar"
+      textoBotonDerecho="Cancelar"
+      (onSubmit)="desactivar()"
+      (onSecundario)="cancelarEdicion()">
+    </app-formulario-reutilizable>
+  </div>
+
+  <!-- Flecha de volver -->
+  <img src="/svg/reusables/flecha.svg" class="flecha-volver" (click)="volver()" />
+
+  <!-- Decoradores -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+
+  <!-- Popup reutilizable -->
+  <app-popup-mensaje
+    *ngIf="mensajeVisible"
+    [tipo]="tipoMensaje"
+    [mensaje]="mensajeTexto"
+    (cerrar)="cerrarMensaje()">
+  </app-popup-mensaje>
+</div>

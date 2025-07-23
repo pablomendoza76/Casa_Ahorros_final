@@ -1,0 +1,33 @@
+<div class="simular-layout">
+  <!-- 📌 Menú lateral -->
+  <menu-reusable [opciones]="menuOpciones"></menu-reusable>
+
+  <!-- 🧠 Contenido principal -->
+  <div class="contenido-inicio gestion-aportes-container">
+    <!-- Encabezado -->
+    <div class="encabezado-principal">
+      <div class="encabezado-horizontal">
+        <img src="/svg/Socios/Deposito.svg" alt="Pagos y Retiros" />
+        <h1>Movimientos de Socios</h1>
+      </div>
+      <div class="titulo-central">Consulta detallada de las transacciones del socio</div>
+    </div>
+
+   
+    <!-- 📋 Tabla dinámica -->
+    <div class="panel-tabla">
+      <app-tabla-dinamica
+        [filas]="movimientos"
+        [configuracionColumnas]="columnas"
+        [mostrarEncabezado]="true"
+      >
+        <ng-template #tipoTpl let-mov>{{ mov.tipo }}</ng-template>
+        <ng-template #socioTpl let-mov>{{ mov.socio }}</ng-template>
+        <ng-template #cuentaTpl let-mov>{{ mov.numero_cuenta }}</ng-template>
+        <ng-template #montoTpl let-mov>{{ mov.monto }}</ng-template>
+        <ng-template #fechaTpl let-mov>{{ mov.fecha }}</ng-template>
+        <ng-template #descTpl let-mov>{{ mov.descripcion }}</ng-template>
+      </app-tabla-dinamica>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+<div class="ingresos-egresos-container">
+  <!-- Título -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="/svg/inicio/opciones/money-transfer.svg" alt="Ingresos y Egresos" />
+      <h1>Flujo de Caja<br />Ingresos y Egresos</h1>
+    </div>
+  </div>
+
+  <!-- Gráfico de barras -->
+  <div class="panel-tabla">
+    <app-graficos
+  [tipo]="'linea'"
+  [datos]="datosGrafico"
+  [indicadores]="indicadores"
+  identificador="grafico-flujo-caja"
+  [mostrarBotonDetalle]="false">
+</app-graficos>
+
+  </div>
+
+  <!-- Botón volver -->
+  <img
+    src="/svg/reusables/flecha.svg"
+    class="flecha-volver"
+    (click)="volver()"
+    alt="Volver"
+  />
+
+  <!-- Decoradores -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>

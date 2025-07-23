@@ -1,0 +1,35 @@
+<div class="gestion-aportes-container">
+  <!-- Encabezado principal -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="/svg/inicio/opciones/save-money.svg" alt="Gestión de Aportes" />
+      <h1>Gestión de<br />Aportes</h1>
+    </div>
+  </div>
+
+  <!-- Formulario de aporte -->
+  <ng-container *ngIf="formularioListo">
+  <app-formulario-reutilizable
+    [campos]="camposFormulario"
+    [tituloFormulario]="tituloFormulario"
+    textoBotonIzquierdo="Guardar"
+    textoBotonDerecho=""
+    (onSubmit)="onFormularioSubmit($event)">
+  </app-formulario-reutilizable>
+</ng-container>
+
+  <!-- Flecha volver -->
+  <img src="/svg/reusables/flecha.svg" class="flecha-volver" (click)="volver()" />
+
+  <!-- Decoraciones -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>
+
+<app-popup-mensaje
+  *ngIf="mensajeVisible"
+  [tipo]="tipoMensaje"
+  [mensaje]="mensajeTexto"
+  (cerrar)="cerrarMensaje()">
+</app-popup-mensaje>
+

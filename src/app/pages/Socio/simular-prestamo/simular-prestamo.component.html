@@ -1,0 +1,35 @@
+<div class="simular-layout">
+  <!-- 📌 Menú lateral -->
+  <menu-reusable [opciones]="menuOpciones"></menu-reusable>
+
+  <!-- 🧠 Contenido principal -->
+  <div class="contenido-inicio simular-prestamo-container">
+    <!-- Encabezado con título -->
+    <div class="encabezado-principal">
+      <img src="/svg/Socios/simulador.svg" alt="Icono Simulador" />
+      <h1>Simulador Aportes/ Prestamos</h1>
+    </div>
+
+    <!-- 🧾 Formulario con marco y estilo -->
+    <div class="formulario-wrapper">
+      <ng-container *ngIf="formularioListo">
+        <app-formulario-reutilizable
+          [campos]="camposFormulario"
+          textoBotonIzquierdo="Simular"
+          textoBotonDerecho=""
+          (onSubmit)="onFormularioSubmit($event)"
+        >
+        </app-formulario-reutilizable>
+      </ng-container>
+    </div>
+
+    <!-- 📩 Resultado en popup -->
+    <app-popup-mensaje
+      *ngIf="mensajeVisible"
+      [tipo]="tipoMensaje"
+      [mensaje]="mensajeTexto"
+      (cerrar)="cerrarMensaje()"
+    >
+    </app-popup-mensaje>
+  </div>
+</div>

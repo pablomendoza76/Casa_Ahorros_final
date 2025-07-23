@@ -1,0 +1,185 @@
+@use '../../../shared/catalogo/colores.scss' as *;
+@use '../../../shared/catalogo/tipografia.scss' as *;
+
+$ancho-menu: 20rem;
+
+// 📌 Menú lateral fijo
+menu-reusable {
+  width: $ancho-menu;
+  min-width: $ancho-menu;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+// 🌐 Layout general
+.simular-layout {
+  display: flex;
+  font-family: $fuente-principal;
+  min-height: 100vh;
+}
+
+// 🧠 Contenedor principal de movimientos
+.gestion-aportes-container {
+  margin-left: $ancho-menu;
+  width: calc(100% - #{$ancho-menu});
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  box-sizing: border-box;
+
+  .encabezado-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    .encabezado-horizontal {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      img {
+        width: 60px;
+        height: 60px;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: $color-primario;
+        margin: 0;
+        line-height: 1.2;
+      }
+    }
+
+    .titulo-central {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #222;
+      margin-left: 0.4rem;
+    }
+  }
+
+   .panel-tabla {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+
+    app-tabla-dinamica {
+      display: block;
+      width: 100%;
+      max-width: 65rem;
+
+      .barra-busqueda {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+    }
+  }
+
+  .flecha-volver {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// 📱 Responsive
+// 📱 Responsive
+@media (max-width: 768px) {
+  .simular-layout {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  menu-reusable {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-width: auto;
+  }
+
+  .gestion-aportes-container {
+    margin-left: 0;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+    align-items: stretch;
+    gap: 1.5rem;
+
+    .encabezado-principal {
+      .encabezado-horizontal {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
+
+        h1 {
+          font-size: 1.6rem;
+          text-align: center;
+        }
+      }
+
+      .titulo-central {
+        font-size: 1.2rem;
+        text-align: center;
+        margin-left: 0;
+      }
+    }
+
+    .panel-tabla {
+      width: 90%;
+      padding: 0.5rem;
+      border-radius: 0.8rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      overflow-x: auto;
+
+      app-tabla-dinamica {
+        min-width: 90%;
+ 
+
+        .tabla {
+          font-size: 0.85rem;
+          border-collapse: collapse;
+
+          th,
+          td {
+            padding: 0.4rem 0.6rem;
+            text-align: center;
+            word-wrap: break-word;
+          }
+        }
+
+        .barra-busqueda {
+          padding: 0.4rem 0.8rem;
+
+          input {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}
+

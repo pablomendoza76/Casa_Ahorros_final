@@ -1,0 +1,85 @@
+<div [attr.id]="identificador">
+
+  <!-- Tabla de detalle -->
+  <div *ngIf="verDetalle; else grafico">
+    <h3>Detalle de Aportes</h3>
+    <app-tabla-dinamica
+      [filas]="filasTabla"
+      [configuracionColumnas]="configuracionColumnas">
+    </app-tabla-dinamica>
+  </div>
+
+  <!-- Gráfico + Totales -->
+  <ng-template #grafico>
+    <div class="grafico-contenedor">
+
+      <!-- Área del gráfico (Izquierda) -->
+      <div class="grafico-area">
+
+        <ngx-charts-bar-vertical
+          *ngIf="tipo === 'barra'"
+          [results]="dataGrafico"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          xAxisLabel="Tipo"
+          yAxisLabel="Monto"
+          [scheme]="'vivid'">
+        </ngx-charts-bar-vertical>
+
+        <ngx-charts-pie-chart
+          *ngIf="tipo === 'pastel'"
+          [results]="dataGrafico"
+          [legend]="true"
+          [labels]="true"
+          [scheme]="'vivid'">
+        </ngx-charts-pie-chart>
+
+        <ngx-charts-line-chart
+          *ngIf="tipo === 'linea'"
+          [results]="dataGrafico"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="false"
+          [showXAxisLabel]="true"
+          [showYAxisLabel]="true"
+          xAxisLabel="Tipo"
+          yAxisLabel="Monto"
+          [scheme]="'vivid'">
+        </ngx-charts-line-chart>
+
+      </div>
+
+      <!-- Área derecha: Totales + Botones -->
+      <div class="panel-totales">
+
+        <!-- Indicadores dinámicos con clase tipo indicador-1, indicador-2, etc. -->
+        <div *ngFor="let indicador of indicadores; let i = index"
+             [ngClass]="['total-box', 'indicador-' + (i + 1)]">
+          <strong>{{ indicador.nombre }}:</strong>
+          {{ indicador.valor | number:'1.2-2' }}{{ indicador.sufijo || '' }}
+        </div>
+
+        <!-- Botón Detalle -->
+        <button *ngIf="mostrarBotonDetalle" (click)="mostrarTabla()">
+          Ver Detalle de Aportes
+        </button>
+
+        <!--  Aquí se inserta el botón + Crear Aporte desde el componente padre -->
+        <ng-content></ng-content>
+
+      </div>
+
+    </div>
+  </ng-template>
+
+</div>
+
+<!-- Plantillas columnas tabla -->
+<ng-template #columnaTipo let-fila> {{ fila.tipo }} </ng-template>
+<ng-template #columnaFecha let-fila> {{ fila.fecha }} </ng-template>
+<ng-template #columnaInteres let-fila> {{ fila.interes }} </ng-template>
+<ng-template #columnaMonto let-fila> {{ fila.monto }} </ng-template>
+<ng-template #columnaSaldo let-fila> {{ fila.saldo }} </ng-template>

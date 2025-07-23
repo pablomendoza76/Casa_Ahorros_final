@@ -1,0 +1,35 @@
+<div class="inicio-usuarios-container">
+  <!-- Título superior izquierda -->
+  <div class="titulo-usuarios">
+    <img src="/svg/inicio/opciones/payment-method.svg" alt="icono usuarios" />
+    <h2>Gestión de Prestamos</h2>
+  </div>
+
+  <!-- Pregunta introductoria -->
+  <div class="pregunta-accion"></div>
+
+  <!-- Opciones -->
+  <div class="acciones-usuarios">
+    <div class="accion" (click)="irA('Aporbados')">
+      <img src="/svg/prestamos/Aprobados.svg" alt="Aporbados" />
+      <span>Aprobados</span>
+    </div>
+    <div class="accion" (click)="irA('Negados')">
+      <img src="/svg/prestamos/Negados.svg" alt="Negados" />
+      <span>Negados</span>
+    </div>
+    <div class="accion" (click)="irA('Espera')">
+      <img src="/svg/prestamos/Espera.svg" alt="Espera" />
+      <span>En espera</span>
+    </div>
+  </div>
+
+  <!-- Decoradores circulares -->
+  <div class="decorador decorador-izq"></div>
+  <div class="decorador decorador-der"></div>
+
+  <!-- Botón volver (solo ubicación) -->
+  <img src="/svg/reusables/flecha.svg" class="flecha-volver" (click)="volver()" />
+
+  
+</div>

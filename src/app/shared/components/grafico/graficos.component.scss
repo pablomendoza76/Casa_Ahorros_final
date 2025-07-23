@@ -1,0 +1,308 @@
+@use '../../../shared/catalogo/colores.scss' as *;
+@use '../../../shared/catalogo/tipografia.scss' as *;
+@use 'sass:color';
+
+/* ===== VARIABLES ===== */
+$radius-container: 1rem;
+$radius-elements: 0.6rem;
+$shadow-normal: 0 2px 8px rgba(0, 0, 0, 0.08);
+$shadow-hover: 0 4px 14px rgba(0, 0, 0, 0.15);
+$transition: 0.3s ease;
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+.grafico-contenedor {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 72rem;
+  margin: 6rem auto;
+  padding: 1.8rem 2rem;
+  background-color: $color-blanco;
+  border-radius: $radius-container;
+  box-shadow: $shadow-normal;
+  gap: 2rem;
+
+  &:hover {
+    box-shadow: $shadow-hover;
+  }
+}
+
+/* ===== ÁREA DEL GRÁFICO ===== */
+.grafico-area {
+  flex: 1 1 62%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  ngx-charts-bar-vertical,
+  ngx-charts-pie-chart,
+  ngx-charts-line-chart {
+    width: 100%;
+    height: 26rem;
+    min-height: 24rem;
+  }
+
+  ::ng-deep svg {
+    height: 26rem !important;
+  }
+}
+
+/* ===== PANEL TOTALES DERECHA ===== */
+.panel-totales {
+  flex: 0 0 26%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.7rem;
+  min-width: 10rem;
+  max-width: 14rem;
+}
+
+/* ===== ESTILO BASE PARA INDICADORES ===== */
+.total-box {
+  width: 100%;
+  max-width: 11rem;
+  margin: 0 auto;
+  padding: 0.4rem 0.8rem;
+  border-radius: $radius-elements;
+  font-size: 0.85rem;
+  font-weight: $fuente-semi;
+  text-align: center;
+  box-shadow: $shadow-normal;
+  line-height: 1.2;
+  transition: transform $transition, box-shadow $transition;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+
+  strong {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 0.15rem;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-hover;
+  }
+}
+
+/* ===== CLASES PERSONALIZADAS PARA INDICADORES DINÁMICOS ===== */
+.saldo {
+  background-color: $color-amarillo-dorado;
+  color: $color-texto-oscuro-ios;
+
+  &:hover {
+    background-color: color.scale($color-amarillo-dorado, $lightness: -10%);
+  }
+}
+
+.interes-total {
+  background-color: $color-primario;
+  color: $color-blanco;
+
+  &:hover {
+    background-color: $color-primario-hover;
+  }
+}
+
+.ganancia-total {
+  background-color: $color-amarillo;
+  color: $color-texto-oscuro-ios;
+
+  &:hover {
+    background-color: color.scale($color-amarillo, $lightness: -10%);
+  }
+}
+
+/* === CONTENEDOR DECORATIVO DEL SALDO TOTAL ABAJO === */
+.saldo-total {
+  margin-top: 1rem;
+  background: linear-gradient(135deg, $color-amarillo-dorado, darken($color-amarillo-ios, 5%));
+  color: $color-texto-oscuro-ios;
+  font-weight: $fuente-semi;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  text-align: right;
+  font-size: 1.05rem;
+  box-shadow: $sombra-suave;
+  max-width: 8rem;
+  margin-left: auto;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ===== BOTÓN DETALLE (primario) ===== */
+button,
+.detalle-button {
+  margin-top: 0.5rem;
+  background-color: $color-primario;
+  color: $color-blanco;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: $radius-elements;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: $fuente-semi;
+  box-shadow: $shadow-normal;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all $transition;
+  width: 100%;
+  max-width: 11rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  &:hover {
+    background-color: $color-primario-hover;
+    transform: translateY(-2px);
+    box-shadow: $shadow-hover;
+  }
+}
+
+/* ===== BOTÓN CREAR (doradito) ===== */
+::ng-deep .btn-ver {
+  @extend .detalle-button;
+  background-color: $color-amarillo-dorado;
+  color: $color-texto-oscuro-ios;
+
+  &:hover {
+    background-color: color.scale($color-amarillo-dorado, $lightness: -10%);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px color.adjust($color-amarillo-dorado, $lightness: 30%);
+  }
+}
+
+/* ===== BARRAS MULTICOLOR ===== */
+::ng-deep ngx-charts-bar-vertical .bar {
+  stroke-width: 0;
+  rx: 5px;
+  transition: transform 0.2s ease, fill 0.3s ease;
+
+  &:nth-child(3n+1) { fill: $color-primario; }
+  &:nth-child(3n+2) { fill: $color-amarillo; }
+  &:nth-child(3n+3) { fill: color.scale($color-amarillo-dorado, $lightness: 10%); }
+
+  &:hover {
+    filter: brightness(1.1);
+    transform: scaleY(1.08);
+  }
+}
+
+/* ===== TOOLTIP ===== */
+::ng-deep .tooltip-anchor {
+  position: absolute;
+  background-color: $color-amarillo;
+  color: $color-texto-oscuro-ios;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 0.8rem;
+  box-shadow: $shadow-hover;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.95;
+  transform: translateY(-1rem);
+  z-index: 10;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .grafico-contenedor {
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1rem;
+  }
+
+  .grafico-area ngx-charts-bar-vertical,
+  .grafico-area ngx-charts-pie-chart,
+  .grafico-area ngx-charts-line-chart {
+    height: 22rem;
+  }
+
+  .panel-totales {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem;
+
+    .total-box,
+    .detalle-button,
+    .btn-ver {
+      flex: 1 1 48%;
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .grafico-contenedor {
+    padding: 0.8rem;
+    margin: 1rem auto;
+  }
+
+  .panel-totales {
+    flex-direction: column;
+
+    .total-box,
+    .detalle-button,
+    .btn-ver {
+      flex: 1 1 100%;
+    }
+  }
+
+
+  
+}
+
+/* ===== COLORES DINÁMICOS PARA INDICADORES ===== */
+.indicador-1 {
+  background-color: $color-primario;
+  color: $color-blanco;
+
+  &:hover {
+    background-color: $color-primario-hover;
+  }
+}
+
+.indicador-2 {
+  background-color: $color-amarillo;
+  color: $color-texto-oscuro-ios;
+
+  &:hover {
+    background-color: color.scale($color-amarillo, $lightness: -10%);
+  }
+}
+
+.indicador-3 {
+  background-color: $color-amarillo-dorado;
+  color: $color-texto-oscuro-ios;
+
+  &:hover {
+    background-color: color.scale($color-amarillo-dorado, $lightness: -10%);
+  }
+}
+
+.indicador-4 {
+  background-color: lighten($color-primario, 15%);
+  color: $color-blanco;
+
+  &:hover {
+    background-color: lighten($color-primario-hover, 5%);
+  }
+}
+
+.indicador-5 {
+  background-color: darken($color-amarillo-ios, 10%);
+  color: $color-blanco;
+
+  &:hover {
+    background-color: darken($color-amarillo-ios, 20%);
+  }
+}
+

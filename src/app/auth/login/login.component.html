@@ -1,0 +1,56 @@
+<div class="login-container">
+  <div class="shape-top-right"></div>
+  <div class="shape-bottom-right"></div>
+
+  <!-- Logo Principal fuera de la tarjeta -->
+  <img class="logo-principal" src="/img/utpl_logo.png" alt="UTPL" />
+  <img class="login-illustration" src="/img/muñeco.png" alt="ilustración" />
+
+  <div class="login-card">
+    <form (ngSubmit)="onIniciarSesion()" #loginForm="ngForm">
+      <h3>Iniciar Sesión</h3>
+
+      <label for="correo">Correo electrónico</label>
+      <input
+        id="correo"
+        type="email"
+        name="correo"
+        required
+        [(ngModel)]="correo"
+        placeholder="ejemplo@utpl.edu.ec"
+      />
+
+      <label for="contrasena">Contraseña</label>
+      <div class="password-container">
+        <input
+          id="contrasena"
+          [type]="mostrarContrasena ? 'text' : 'password'"
+          name="contrasena"
+          required
+          [(ngModel)]="contrasena"
+          placeholder="********"
+        />
+        <span class="toggle-visibility" (click)="toggleContrasena()">🙈</span>
+      </div>
+
+      <button type="submit">Iniciar</button>
+      <a class="forgot" href="#">Olvidé mi contraseña</a>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de error -->
+<div class="modal" *ngIf="mostrarModal">
+  <div class="modal-content">
+    <h4>Algo salió mal</h4>
+    <p>{{ mensajeModal }}</p>
+    <button (click)="cerrarModal()">Cerrar</button>
+  </div>
+</div>
+
+<footer>
+  <a href="#">Centro de ayuda</a>
+  <a href="#">Términos del servicio</a>
+  <a href="#">Política de privacidad</a>
+  <a href="#">Contacto</a>
+</footer>

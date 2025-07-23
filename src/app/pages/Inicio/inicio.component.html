@@ -1,0 +1,63 @@
+<div class="inicio-container">
+  <!-- Botón ADMIN (arriba a la derecha) -->
+  <a routerLink="/perfil" class="btn-admin">
+    <img src="/svg/inicio/BotonPerfil.svg" alt="Admin" />
+  </a>
+
+  <h1>¿Qué deseas hacer hoy?</h1>
+  <h3>Sistema de caja de ahorros</h3>
+
+  <div class="menu-grid">
+    <app-menu-card
+  *ngFor="let card of cards"
+  [icon]="card.icon"
+  [title]="card.title"
+  [routerLink]="card.route">
+</app-menu-card>
+
+  </div>
+
+  <!-- Botón AYUDA (abajo a la derecha) -->
+  <!-- Botón AYUDA (abajo a la derecha) -->
+<button class="btn-ayuda" (click)="mostrarModalAyuda = true">
+  <img src="/svg/inicio/BotonGuiaRapida.svg" alt="Ayuda" />
+</button>
+
+<!-- Modal de Ayuda -->
+<div class="modal-ayuda-overlay" *ngIf="mostrarModalAyuda">
+  <div class="modal-ayuda-card">
+    <div class="titulo-ayuda">
+      <h2>¿Necesitas ayuda?</h2>
+      <p>Contáctanos por los siguientes canales</p>
+    </div>
+
+    <div class="opciones-ayuda-cards">
+      <a href="https://wa.me/593999999999" target="_blank" class="opcion-ayuda">
+        <div class="icono-circular whatsapp">
+          <img src="/svg/social/whatsapp.svg" alt="WhatsApp" />
+        </div>
+        <span>WhatsApp</span>
+      </a>
+
+      <a href="https://m.me/soporteCaja" target="_blank" class="opcion-ayuda">
+        <div class="icono-circular messenger">
+          <img src="/svg/social/messenger.svg" alt="Messenger" />
+        </div>
+        <span>Messenger</span>
+      </a>
+
+      <a href="https://facebook.com/soporteCaja" target="_blank" class="opcion-ayuda">
+        <div class="icono-circular facebook">
+          <img src="/svg/social/facebook.svg" alt="Facebook" />
+        </div>
+        <span>Facebook</span>
+      </a>
+    </div>
+
+    <button class="btn-cerrar-modal" (click)="mostrarModalAyuda = false">Cerrar</button>
+  </div>
+</div>
+
+  <!-- Botón Cerrar sesión -->
+  <a class="cerrar-sesion" routerLink="/login">Cerrar Sesión</a>
+</div>

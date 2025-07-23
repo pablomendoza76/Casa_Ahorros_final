@@ -1,0 +1,111 @@
+@use '../../../shared/catalogo/colores.scss' as *;
+@use '../../../shared/catalogo/tipografia.scss' as *;
+
+.crear-usuario-container {
+  position: relative;
+  min-height: 100vh;
+  background: $color-blanco;
+  padding: 2rem 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $fuente-principal;
+
+  .encabezado-principal {
+    width: 100%;
+    position: relative;
+    margin-bottom: 1rem;
+
+    .encabezado-horizontal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-left: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+
+      img {
+        width: 8rem;
+        height: auto;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: $fuente-semi;
+        color: $color-texto-oscuro-ios;
+        margin: 0;
+        line-height: 1.2;
+      }
+    }
+
+    .titulo-central {
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: $fuente-bold;
+      color: $color-primario;
+      margin-top: 5.2rem;
+      margin-bottom: 0.8rem;
+    }
+  }
+
+  .panel-tabla {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+
+    app-tabla-dinamica {
+      display: block;
+      width: 100%;
+      max-width: 65rem;
+
+      .barra-busqueda {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background-color: $color-blanco;
+        padding-block: 0.5rem;
+      }
+    }
+  }
+
+  .flecha-volver {
+    position: absolute;
+    right: 2rem;
+    bottom: 7rem;
+    z-index: 2;
+    cursor: pointer;
+    width: 2.8rem;
+  }
+
+  .decorador-izq,
+  .decorador-der {
+    position: absolute;
+    width: 8rem;
+    height: 8rem;
+    background: $color-secundario;
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .decorador-izq {
+    bottom: 3.5rem;
+    left: 0;
+    transform: translate(-40%, 40%);
+  }
+
+  .decorador-der {
+    top: 0.5rem;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+  .icono-campana {
+    color: $color-amarillo-ios;
+
+
+    &:hover {
+      color: darken($color-amarillo-ios, 10%);
+    }
+  }
+}

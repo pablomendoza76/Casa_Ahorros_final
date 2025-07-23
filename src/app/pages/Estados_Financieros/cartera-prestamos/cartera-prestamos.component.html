@@ -1,0 +1,32 @@
+<div class="cartera-prestamos-container">
+  <!-- Encabezado -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="svg/estados_financieros/cartera.svg" alt="Cartera de Préstamos" />
+      <h1>Cartera de Préstamos</h1>
+    </div>
+  </div>
+
+  <!-- Gráfico de barras -->
+  <div class="panel-tabla">
+    <app-graficos
+      [tipo]="'barra'"
+      [datos]="datosGrafico"
+      [indicadores]="indicadores"
+      identificador="grafico-cartera"
+      [mostrarBotonDetalle]="false"
+    ></app-graficos>
+  </div>
+
+  <!-- Flecha volver -->
+  <img
+    src="/svg/reusables/flecha.svg"
+    class="flecha-volver"
+    (click)="volver()"
+    alt="Volver"
+  />
+
+  <!-- Decoradores -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>

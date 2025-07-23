@@ -1,0 +1,271 @@
+@use '../../../shared/catalogo/colores.scss' as *;
+@use '../../../shared/catalogo/tipografia.scss' as *;
+
+$ancho-menu: 20rem;
+
+// 📌 Menú lateral
+menu-reusable {
+  width: $ancho-menu;
+  min-width: $ancho-menu;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+// 🌐 Layout principal
+.simular-layout {
+  display: flex;
+  font-family: $fuente-principal;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f0f4f8, #ffffff);
+}
+
+// 🧠 Contenedor del simulador
+.simular-prestamo-container {
+  margin-left: $ancho-menu;
+  width: calc(100% - #{$ancho-menu});
+  padding: 3rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+
+  .encabezado-principal {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    img {
+      width: 60px;
+      height: 60px;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: $color-primario;
+      margin: 0;
+    }
+  }
+
+  .formulario-wrapper {
+    background-color: white;
+    padding: 3rem 3.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    // ✅ Borde punteado decorativo restaurado
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    outline: 2px dashed rgba($color-primario, 0.12);
+    outline-offset: -1.5rem;
+
+    h2 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      margin-bottom: 2.5rem;
+      color: $color-primario;
+      text-align: center;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: $color-primario;
+        border-radius: 2px;
+      }
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem 2.5rem;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+
+        label {
+          font-weight: 600;
+          margin-bottom: 0.4rem;
+          color: #222;
+        }
+
+        input,
+        select {
+          border: none;
+          border-radius: 0.8rem;
+          padding: 0.85rem 1.1rem;
+          background-color: #f0f0f0;
+          font-size: 1rem;
+          transition: all 0.2s;
+
+          &::placeholder {
+            color: #999;
+          }
+
+          &:focus {
+            outline: none;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba($color-primario, 0.15);
+          }
+        }
+      }
+
+      .form-boton {
+        grid-column: span 2;
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+
+        button {
+          background-color: $color-primario;
+          color: white;
+          padding: 0.9rem 3rem;
+          border-radius: 2rem;
+          font-weight: 600;
+          font-size: 1rem;
+          border: none;
+          cursor: pointer;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+          transition: background-color 0.3s, transform 0.2s;
+
+          &:hover {
+            background-color: darken($color-primario, 10%);
+            transform: translateY(-1px);
+          }
+
+          &:active {
+            transform: scale(0.96);
+          }
+        }
+      }
+    }
+  }
+}
+
+// 📱 Responsive
+@media (max-width: 768px) {
+  .simular-layout {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+  }
+
+  menu-reusable {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-width: auto;
+  }
+
+  .simular-prestamo-container {
+    margin-left: 0;
+    width: 100%;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    box-sizing: border-box;
+
+    .encabezado-principal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+
+      img {
+        width: 48px;
+        height: 48px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin: 0;
+        color: $color-primario;
+      }
+    }
+
+    .formulario-wrapper {
+      width: 90%;
+      max-width: 95%;
+      padding: 1rem;
+      border-radius: 1.2rem;
+      background-color: white;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+      margin-top: 0.5rem;
+      margin-bottom: auto;
+
+      // Centrado visual y decorativo
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      outline: 2px dashed rgba($color-primario, 0.12);
+      outline-offset: -1rem;
+    
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.2rem;
+        text-align: center;
+        color: $color-primario;
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+
+        .form-group {
+          label {
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+          }
+
+          input,
+          select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border-radius: 0.6rem;
+          }
+        }
+
+        .form-boton {
+          display: flex;
+          justify-content: center;
+          margin-top: 1.5rem;
+
+          button {
+            padding: 0.8rem 2.2rem;
+            font-size: 1rem;
+            border-radius: 2rem;
+            width: 100%;
+            max-width: 260px;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+

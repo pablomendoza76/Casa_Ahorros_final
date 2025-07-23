@@ -1,0 +1,51 @@
+
+<nav class="menu-lateral">
+  <ul>
+    <li *ngFor="let item of opciones" 
+        [routerLink]="item.ruta" 
+        routerLinkActive="activo" 
+        [routerLinkActiveOptions]="{exact:true}"
+        [class.centro]="item.centro === true">
+      <div class="contenido-opcion">
+        <ng-container *ngIf="!item.svg; else svgIcono">
+          <span class="icono material-symbols-outlined">{{ item.icono }}</span>
+        </ng-container>
+        <ng-template #svgIcono>
+          <img class="icono-svg" [src]="item.svg" alt="icono" />
+        </ng-template>
+        <span class="etiqueta">{{ item.etiqueta }}</span>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<nav class="menu-inferior">
+  <ul>
+    <!-- Hueco dinámico debajo del ítem activo -->
+    <div
+      class="hueco-activo"
+      *ngIf="opciones.length"
+      [ngStyle]="{ left: calcularPosicionHueco() + '%' }"
+    ></div>
+
+    <!-- Opciones de menú -->
+    <li *ngFor="let item of opciones"
+        [routerLink]="item.ruta"
+        routerLinkActive="activo"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [class.centro]="item.centro === true"
+        [class.activo]="item.activo === true && !item.centro">
+      
+      <ng-container *ngIf="!item.svg; else svgIcono">
+        <span class="material-symbols-outlined icono-material">{{ item.icono }}</span>
+      </ng-container>
+      <ng-template #svgIcono>
+        <img [src]="item.svg" alt="icono" class="icono-svg" />
+      </ng-template>
+
+      <span class="etiqueta">{{ item.etiqueta }}</span>
+    </li>
+  </ul>
+</nav>
+
+

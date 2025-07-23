@@ -1,0 +1,32 @@
+<div class="indicadores-financieros-container">
+  <!-- Título -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="svg/estados_financieros/indicadores.svg" alt="Indicadores Financieros" />
+      <h1>Indicadores<br />Financieros</h1>
+    </div>
+  </div>
+
+  <!-- Gráfico -->
+  <div class="panel-tabla">
+    <app-graficos
+      [tipo]="'barra'"
+      [datos]="datosGrafico"
+      [indicadores]="indicadores"
+      identificador="grafico-indicadores"
+      [mostrarBotonDetalle]="false"
+    ></app-graficos>
+  </div>
+
+  <!-- Volver -->
+  <img
+    src="/svg/reusables/flecha.svg"
+    class="flecha-volver"
+    (click)="volver()"
+    alt="Volver"
+  />
+
+  <!-- Decoradores -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>

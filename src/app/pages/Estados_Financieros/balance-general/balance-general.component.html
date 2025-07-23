@@ -1,0 +1,35 @@
+
+<div class="gestion-aportes-container">
+  <!-- Encabezado principal -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="/svg/inicio/opciones/money-transfer.svg" alt="Pagos y Retiros" />
+      <h1>Gestión<br />Pagos y Retiros</h1>
+    </div>
+  </div>
+
+  <!-- Panel de tabla -->
+  <div class="panel-tabla">
+    <app-graficos
+    [tipo]="'pastel'"
+    [datos]="datos"
+    [indicadores]="indicadores"
+    identificador="grafico-balance"
+    [mostrarBotonDetalle]="false"
+  >
+  </app-graficos>
+  </div>
+
+  <!-- Flecha de volver -->
+  <!-- Flecha de volver -->
+  <img
+    src="/svg/reusables/flecha.svg"
+    class="flecha-volver"
+    (click)="volver()"
+    alt="Volver"
+  />
+
+  <!-- Decoradores laterales -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>

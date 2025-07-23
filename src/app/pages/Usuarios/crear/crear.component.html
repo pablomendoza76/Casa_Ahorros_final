@@ -1,0 +1,33 @@
+<div class="crear-usuario-container">
+  <!-- Encabezado horizontal con ícono y texto -->
+  <div class="encabezado-horizontal">
+    <img src="/svg/inicio/opciones/management.svg" alt="Gestión de usuarios" />
+    <h1>Gestión de<br />Usuarios</h1>
+  </div>
+
+  <!-- Formulario debajo del encabezado -->
+  <div class="panel-formulario">
+    <app-formulario-reutilizable
+    [tituloFormulario]="'Registro de Usuario'"
+      [campos]="campos"
+      textoBotonIzquierdo="Crear"
+      textoBotonDerecho="Lista Usuarios"
+      (onSubmit)="registrarUsuario($event)"
+      (onSecundario)="irALista()"
+    ></app-formulario-reutilizable>
+  </div>
+
+  <!-- Flecha de volver -->
+  <img src="/svg/reusables/flecha.svg" class="flecha-volver" (click)="volver()" />
+
+  <!-- Decoradores -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>
+
+<app-popup-mensaje
+  *ngIf="mensajeVisible"
+  [tipo]="tipoMensaje"
+  [mensaje]="mensajeTexto"
+  (cerrar)="cerrarMensaje()">
+</app-popup-mensaje>

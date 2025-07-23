@@ -1,0 +1,73 @@
+<div class="gestion-aportes-container">
+  <!-- Encabezado principal -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="/svg/inicio/opciones/payment-method.svg" alt="Gestión de Préstamos" />
+      <h1>Gestión de<br />Préstamos</h1>
+    </div>
+    <h2 class="titulo-central">Préstamos Rechazados</h2>
+  </div>
+
+  <!-- Panel de tabla -->
+  <div class="panel-tabla">
+    <app-tabla-dinamica
+      [filas]="prestamos"
+      [configuracionColumnas]="columnas"
+      [mostrarEncabezado]="true"
+    >
+      <!-- Columna 1: Nombre completo -->
+      <ng-template #nombreTpl let-prestamo>
+        {{ prestamo.nombre_completo }}
+      </ng-template>
+
+      <!-- Columna 2: Contacto -->
+      <ng-template #infoTpl let-prestamo>
+        <div>{{ prestamo.correo }}</div>
+        <div>{{ prestamo.telefono }}</div>
+      </ng-template>
+
+      <!-- Columna 3: Monto -->
+      <ng-template #montoTpl let-prestamo>
+        {{ prestamo.monto }}
+      </ng-template>
+
+      <!-- Columna 4: Pendiente -->
+      <ng-template #pendienteTpl let-prestamo>
+        {{ prestamo.monto_pendiente }}
+      </ng-template>
+
+      <!-- Columna 5: Interés -->
+      <ng-template #interesTpl let-prestamo>
+        {{ prestamo.interes }}
+      </ng-template>
+
+      <!-- Columna 6: Plazo -->
+      <ng-template #plazoTpl let-prestamo>
+        {{ prestamo.plazo }}
+      </ng-template>
+
+      <!-- Columna 7: Estado -->
+      <ng-template #estadoTpl let-prestamo>
+        {{ prestamo.estado }}
+      </ng-template>
+
+      <!-- Columna 8: Fecha de rechazo -->
+      <ng-template #fechaTpl let-prestamo>
+        {{ prestamo.fecha_aprobacion }}
+      </ng-template>
+    </app-tabla-dinamica>
+  </div>
+
+  <!-- Flecha de volver -->
+  <img
+    src="/svg/reusables/flecha.svg"
+    class="flecha-volver"
+    (click)="volver()"
+    alt="Volver"
+  />
+
+  <!-- Decoradores laterales -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+
+</div>

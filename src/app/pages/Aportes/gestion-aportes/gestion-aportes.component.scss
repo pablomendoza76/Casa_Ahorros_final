@@ -1,0 +1,142 @@
+@use '../../../shared/catalogo/colores.scss' as *;
+@use '../../../shared/catalogo/tipografia.scss' as *;
+@use 'sass:color';
+
+.gestion-aportes-container {
+  position: relative;
+  min-height: 100vh;
+  background: $color-blanco;
+  padding: 2rem 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: $fuente-principal;
+
+  .encabezado-principal {
+    width: 100%;
+    position: relative;
+    margin-bottom: 1rem;
+
+    .encabezado-horizontal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-left: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+
+      img {
+        width: 8rem;
+        height: auto;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: $fuente-semi;
+        color: $color-texto-oscuro-ios;
+        margin: 0;
+        line-height: 1.2;
+      }
+    }
+
+    .titulo-central {
+      text-align: center;
+      font-size: 1.7rem;
+      font-weight: $fuente-bold;
+      color: $color-primario;
+      margin-top: 5.2rem;
+      margin-bottom: 0.8rem;
+    }
+  }
+
+  .panel-tabla {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+
+    app-tabla-dinamica {
+      display: block;
+      width: 100%;
+      max-width: 65rem;
+
+      .barra-busqueda {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background-color: $color-blanco;
+        padding-block: 0.5rem;
+      }
+    }
+  }
+
+  .flecha-volver {
+    position: absolute;
+    right: 2rem;
+    bottom: 7rem;
+    z-index: 2;
+    cursor: pointer;
+    width: 2.8rem;
+  }
+
+  .decorador-izq,
+  .decorador-der {
+    position: absolute;
+    width: 8rem;
+    height: 8rem;
+    background: $color-secundario;
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .decorador-izq {
+    bottom: 3.5rem;
+    left: 0;
+    transform: translate(-40%, 40%);
+  }
+
+  .decorador-der {
+    top: 0.5rem;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+
+  // Estilo del botón Ver Aportes
+.btn-ver {
+  background-color: $color-gris-claro;
+  color: $color-primario-ios;
+  border: none;
+  padding: 0.4rem 1.4rem;               // ✅ Más largo y menos alto
+  border-radius: 0.5rem;                // ✅ Menos redondo
+  font-size: 0.85rem;
+  font-weight: $fuente-regular;          // ✅ Más fino
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: nowrap;
+  letter-spacing: 0.2px;
+  line-height: 1;
+  min-width: 7rem;                      // ✅ Para que tenga longitud mínima horizontal
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+
+  &:hover {
+    background-color: color.adjust($color-gris-claro, $lightness: -6%);
+    color: color.adjust($color-primario-ios, $lightness: -5%);
+  }
+
+  &:active {
+    background-color: color.adjust($color-gris-claro, $lightness: -10%);
+    transform: scale(0.98);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px color.adjust($color-primario-ios, $lightness: 35%);
+  }
+}
+
+
+}

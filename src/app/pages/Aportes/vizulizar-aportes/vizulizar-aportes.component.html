@@ -1,0 +1,53 @@
+<div class="gestion-aportes-container">
+
+  <!-- Encabezado principal -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="/svg/inicio/opciones/save-money.svg" alt="Gestión de Aportes" />
+      <h1>Gestión de<br />Aportes</h1>
+    </div>
+  </div>
+
+  <!-- Información del socio -->
+  <div class="socio-info-card" *ngIf="socio">
+    <img
+      [src]="socio.foto || '/assets/images/avatar-socio.png'"
+      alt="Foto del socio"
+      class="socio-avatar"
+    />
+    <div class="socio-detalles">
+      <div class="socio-nombre">{{ socio.nombre }}</div>
+      <div class="socio-email">{{ socio.correo }}</div>
+      <div class="socio-telefono">{{ socio.telefono }}</div>
+    </div>
+  </div>
+
+  <!-- Panel gráfico -->
+  <div class="panel-grafico">
+    <app-graficos
+      [tipo]="'barra'"
+      [datos]="movimientos"
+      [indicadores]="indicadores"
+      identificador="grafico-movimientos"
+      [mostrarBotonDetalle]="true">
+      
+      <!-- Botón crear aporte -->
+      <ng-container>
+        <button class="btn-ver" (click)="irACrearAporte()">+ Crear Aporte</button>
+      </ng-container>
+      
+    </app-graficos>
+  </div>
+
+  <!-- Botón de volver -->
+  <img
+    src="/svg/reusables/flecha.svg"
+    class="flecha-volver"
+    (click)="volver()"
+    alt="Volver"
+  />
+
+  <!-- Decoradores laterales -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>

@@ -1,0 +1,62 @@
+<div class="gestion-aportes-container">
+  <!-- Encabezado principal -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="/svg/inicio/opciones/payment-method.svg" alt="Gestión de Préstamos" />
+      <h1>Gestión de<br />Préstamos</h1>
+    </div>
+    <h2 class="titulo-central">Préstamos en Espera</h2>
+  </div>
+
+  <!-- Panel de tabla -->
+  <div class="panel-tabla">
+    <app-tabla-dinamica
+      [filas]="prestamos"
+      [configuracionColumnas]="columnas"
+      [mostrarEncabezado]="true"
+    >
+      <ng-template #nombreTpl let-prestamo>
+        {{ prestamo.nombre_completo }}
+      </ng-template>
+
+      <ng-template #infoTpl let-prestamo>
+        <div>{{ prestamo.correo }}</div>
+        <div>{{ prestamo.telefono }}</div>
+      </ng-template>
+
+      <ng-template #montoTpl let-prestamo>
+        {{ prestamo.monto }}
+      </ng-template>
+
+      <ng-template #pendienteTpl let-prestamo>
+        {{ prestamo.monto_pendiente }}
+      </ng-template>
+
+      <ng-template #interesTpl let-prestamo>
+        {{ prestamo.interes }}
+      </ng-template>
+
+      <ng-template #plazoTpl let-prestamo>
+        {{ prestamo.plazo }}
+      </ng-template>
+
+      <ng-template #estadoTpl let-prestamo>
+        {{ prestamo.estado }}
+      </ng-template>
+
+      <ng-template #fechaTpl let-prestamo>
+        {{ prestamo.fecha_aprobacion }}
+      </ng-template>
+    </app-tabla-dinamica>
+  </div>
+
+  <img
+    src="/svg/reusables/flecha.svg"
+    class="flecha-volver"
+    (click)="volver()"
+    alt="Volver"
+  />
+
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>

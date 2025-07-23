@@ -1,0 +1,83 @@
+@use '../../../shared/catalogo/colores.scss' as *;
+
+.indicadores-financieros-container {
+  position: relative;
+  min-height: 100vh;
+  background: $color-blanco;
+  padding: 2rem 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+  font-family: sans-serif;
+
+  .encabezado-principal {
+    width: 100%;
+    position: relative;
+    margin-bottom: 2rem;
+
+    .encabezado-horizontal {
+      position: absolute;
+      top: 0.5rem;
+      left: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      img {
+        width: 7rem;
+        height: 7rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: #000;
+        margin: 0;
+      }
+    }
+  }
+
+  .panel-tabla {
+    width: 100%;
+    padding: 0 1rem;
+    z-index: 2;
+  }
+
+  .flecha-volver {
+    position: absolute;
+    right: 2rem;
+    bottom: 7rem;
+    z-index: 2;
+    cursor: pointer;
+    width: 2.5rem;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .decorador-izq,
+  .decorador-der {
+    position: absolute;
+    width: 9rem;
+    height: 9rem;
+    background: $color-primario;
+    border-radius: 50%;
+    opacity: 0.9;
+    z-index: 0;
+  }
+
+  .decorador-izq {
+    bottom: 2rem;
+    left: 0;
+    transform: translate(-50%, 0);
+  }
+
+  .decorador-der {
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+  }
+}

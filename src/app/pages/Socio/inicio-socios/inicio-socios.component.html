@@ -1,0 +1,70 @@
+<div class="inicio-layout">
+  <menu-reusable [opciones]="menuOpciones"></menu-reusable>
+
+  <main class="contenido-inicio">
+    <!-- 🟦 Barra superior con botón salir -->
+    <div class="barra-superior">
+      <h1 class="titulo-principal">Estado de Cuenta</h1>
+      <div class="acciones-superior">
+        <button class="btn-salir" (click)="onSalir()">Salir</button>
+      </div>
+    </div>
+
+    <!-- 🟩 Contenedor general tipo tarjeta -->
+    <div class="contenedor-cuenta" *ngIf="socio && cuenta">
+      <!-- 👤 Datos del socio -->
+      <div class="encabezado-estado">
+        <div class="avatar-usuario">
+          <img *ngIf="socio.foto_perfil; else icono" [src]="socio.foto_perfil" alt="Foto perfil" />
+          <ng-template #icono>
+            <span class="material-symbols-outlined">account_circle</span>
+          </ng-template>
+        </div>
+
+        <div class="datos-usuario">
+          <h2>{{ socio.nombre }} {{ socio.apellido }}</h2>
+          <p class="cargo">Docente de la Facultad de Ingenierías<br />y Arquitectura</p>
+          <hr class="linea-divisoria" />
+
+          <div class="info-clave">
+            <div><strong>Número de Cuenta:</strong> {{ cuenta.numero_cuenta || 'N/D' }}</div>
+            <div><strong>Tipo de Cuenta:</strong> {{ socio.tipo_cuenta || 'N/D' }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 💰 Saldo tipo tarjeta (solo para móviles, controlado por CSS) -->
+      <div class="saldo-disponible tarjeta-saldo">
+        <div class="label">Saldo disponible</div>
+        <div class="monto">$ {{ cuenta.saldo?.toFixed(2) || '0.00' }}</div>
+      </div>
+    </div>
+
+    <!-- 📊 Tabla de movimientos -->
+    <div class="tabla-movimientos" *ngIf="movimientos.length > 0">
+      <h3>Movimientos recientes</h3>
+
+      <!-- Scroll interno -->
+      <div class="tabla-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Fecha</th>
+              <th>Monto</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of movimientos">
+              <td>{{ m.tipo }}</td>
+              <td>{{ m.fecha }}</td>
+              <td>${{ m.monto?.toFixed(2) }}</td>
+              <td>{{ m.descripcion || '—' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>

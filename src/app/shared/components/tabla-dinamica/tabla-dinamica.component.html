@@ -1,0 +1,49 @@
+<div class="contenedor-tabla">
+  <!-- Barra de búsqueda -->
+  <div class="barra-busqueda">
+    <input type="text" placeholder="Buscar..." [(ngModel)]="textoBusqueda" />
+    <mat-icon class="icono">search</mat-icon>
+  </div>
+
+  <div *ngIf="mostrarEncabezado" class="encabezado-tabla">
+  <ng-container *ngFor="let columna of configuracionColumnas; let idx = index">
+    <div [ngClass]="
+          'columna-' + idx +
+          (columna.tipo === 'imagen' ? ' columna-imagen' : '') +
+          (columna.tipo === 'icono' ? ' columna-icono' : '') +
+          (columna.tipo === 'otros' ? ' columna-otros' : '')
+        ">
+      <strong>{{ columna.titulo }}</strong>
+    </div>
+  </ng-container>
+</div>
+
+
+  <!-- Filas -->
+  <div class="cuerpo-filas">
+    <div *ngFor="let fila of filasFiltradas" class="fila-usuario">
+      <ng-container *ngFor="let columna of configuracionColumnas; let idx = index">
+        <div [ngClass]="
+              'columna-' + idx +
+              (columna.tipo === 'imagen' ? ' columna-imagen' : '') +
+              (columna.tipo === 'icono' ? ' columna-icono' : '') +
+              (columna.tipo === 'otros' ? ' columna-otros' : '')
+            ">
+
+          <!-- Si es imagen -->
+          <ng-container *ngIf="columna.tipo === 'imagen'; else normalColumna">
+            <div class="contenedor-avatar">
+              <ng-container *ngTemplateOutlet="columna.template; context: { $implicit: fila }"></ng-container>
+            </div>
+          </ng-container>
+
+          <!-- Si no es imagen -->
+          <ng-template #normalColumna>
+            <ng-container *ngTemplateOutlet="columna.template; context: { $implicit: fila }"></ng-container>
+          </ng-template>
+
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

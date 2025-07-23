@@ -1,0 +1,36 @@
+<div class="gestion-aportes-container">
+  <!-- Encabezado -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="svg/inicio/opciones/budget.svg" />
+      <h1>Estados Financieros</h1>
+    </div>
+    <div class="titulo-central">
+      <h3>Visualiza la situación financiera de tu caja de ahorro</h3>
+    </div>
+  </div>
+
+  <!-- Tarjetas -->
+  <div class="panel-tabla">
+    <div class="menu-grid">
+      <app-menu-card
+        *ngFor="let card of cards"
+        [icon]="card.icon"
+        [title]="card.title"
+        [routerLink]="card.route"
+      ></app-menu-card>
+    </div>
+  </div>
+
+  <!-- Botón volver -->
+  <img
+    src="/svg/reusables/flecha.svg"
+    class="flecha-volver"
+    (click)="volver()"
+    alt="Volver"
+  />
+
+  <!-- Decoradores -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>

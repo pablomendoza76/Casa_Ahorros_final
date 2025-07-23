@@ -1,0 +1,35 @@
+<div class="inicio-usuarios-container">
+  <!-- Título superior izquierda -->
+  <div class="titulo-usuarios">
+    <img src="/svg/inicio/opciones/management.svg" alt="icono usuarios" />
+    <h2>Gestión de Usuarios</h2>
+  </div>
+
+  <!-- Pregunta introductoria -->
+  <div class="pregunta-accion"></div>
+
+  <!-- Opciones -->
+  <div class="acciones-usuarios">
+    <div class="accion" (click)="irA('registrar')">
+      <img src="/svg/usuario/inicio/crear_us.svg" alt="Registrar usuario" />
+      <span>Registrar</span>
+    </div>
+    <div class="accion" (click)="irA('actualizar')">
+      <img src="/svg/usuario/inicio/act_us.svg" alt="Actualizar usuario" />
+      <span>Actualizar</span>
+    </div>
+    <div class="accion" (click)="irA('eliminar')">
+      <img src="/svg/usuario/inicio/eliminar.svg" alt="Eliminar usuario" />
+      <span>Eliminar</span>
+    </div>
+  </div>
+
+  <!-- Decoradores circulares -->
+  <div class="decorador decorador-izq"></div>
+  <div class="decorador decorador-der"></div>
+
+  <!-- Botón volver (solo ubicación) -->
+  <img src="/svg/reusables/flecha.svg" class="flecha-volver" (click)="volver()" />
+
+  
+</div>

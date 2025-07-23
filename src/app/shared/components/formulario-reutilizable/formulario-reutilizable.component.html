@@ -1,0 +1,85 @@
+  <h2 class="titulo">{{ tituloFormulario }}</h2>
+
+  <form [formGroup]="formulario" (ngSubmit)="enviar()" class="formulario" [ngClass]="{'una-columna': campos.length <= 1}">
+
+    <!-- Columna izquierda -->
+    <div class="columna">
+      <ng-container *ngFor="let campo of campos; let i = index">
+        <ng-container *ngIf="i % 2 === 0 && campo.visible !== false">
+
+          <!-- Campo visible -->
+          <div class="campo" *ngIf="campo.tipo !== 'hidden'">
+            <label>{{ campo.label }}:</label>
+
+            <!-- SELECT -->
+            <select 
+              *ngIf="campo.tipo === 'select'" 
+              [formControlName]="campo.key"
+              [disabled]="campo.deshabilitado"
+              (change)="ejecutarOnChange(campo)">
+              <option *ngFor="let opcion of campo.opciones" [value]="opcion.value">{{ opcion.label }}</option>
+            </select>
+
+            <!-- INPUT -->
+            <input 
+              *ngIf="campo.tipo !== 'select'" 
+              [type]="campo.tipo" 
+              [placeholder]="campo.placeholder" 
+              [formControlName]="campo.key"
+              [disabled]="campo.deshabilitado"
+              (input)="ejecutarOnChange(campo)"
+              autocomplete="off" />
+          </div>
+
+          <!-- Campo oculto -->
+          <input *ngIf="campo.tipo === 'hidden'" [formControlName]="campo.key" type="hidden" />
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="columna" *ngIf="campos.length > 1">
+      <ng-container *ngFor="let campo of campos; let i = index">
+        <ng-container *ngIf="i % 2 !== 0 && campo.visible !== false">
+
+          <!-- Campo visible -->
+          <div class="campo" *ngIf="campo.tipo !== 'hidden'">
+            <label>{{ campo.label }}:</label>
+
+            <!-- SELECT -->
+            <select 
+              *ngIf="campo.tipo === 'select'" 
+              [formControlName]="campo.key"
+              [disabled]="campo.deshabilitado"
+              (change)="ejecutarOnChange(campo)">
+              <option *ngFor="let opcion of campo.opciones" [value]="opcion.value">{{ opcion.label }}</option>
+            </select>
+
+            <!-- INPUT -->
+            <input 
+              *ngIf="campo.tipo !== 'select'" 
+              [type]="campo.tipo" 
+              [placeholder]="campo.placeholder" 
+              [formControlName]="campo.key"
+              [disabled]="campo.deshabilitado"
+              (input)="ejecutarOnChange(campo)"
+              autocomplete="off" />
+          </div>
+
+          <!-- Campo oculto -->
+          <input *ngIf="campo.tipo === 'hidden'" [formControlName]="campo.key" type="hidden" />
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <!-- Botones -->
+    <div class="botones">
+      <button *ngIf="textoBotonIzquierdo && textoBotonIzquierdo.trim() !== ''" type="submit">
+        {{ textoBotonIzquierdo }}
+      </button>
+      <button *ngIf="textoBotonDerecho && textoBotonDerecho.trim() !== ''" type="button" (click)="onSecundario.emit()">
+        {{ textoBotonDerecho }}
+      </button>
+    </div>
+
+  </form>

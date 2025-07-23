@@ -1,0 +1,60 @@
+<div class="gestion-aportes-container">
+  <!-- Encabezado principal -->
+  <div class="encabezado-principal">
+    <div class="encabezado-horizontal">
+      <img src="/svg/inicio/opciones/save-money.svg" alt="Gestión de Aportes" />
+      <h1>Gestión de<br />Aportes</h1>
+    </div>
+    <h2 class="titulo-central">Listado de Socios</h2>
+  </div>
+
+  <!-- Panel de tabla -->
+  <div class="panel-tabla">
+    <app-tabla-dinamica [filas]="filas" [configuracionColumnas]="configuracionColumnas">
+
+      <!-- Columna 1: Foto -->
+      <ng-template #columnaFoto let-fila>
+        <ng-container *ngIf="fila.foto; else sinFoto">
+          <img [src]="fila.foto" alt="Foto perfil" />
+        </ng-container>
+        <ng-template #sinFoto>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ccc">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+          </svg>
+        </ng-template>
+      </ng-template>
+
+      <!-- Columna 2: Nombre -->
+      <ng-template #columnaNombre let-fila>
+        {{ fila.nombre }}
+      </ng-template>
+
+      <!-- Columna 3: Correo y Teléfono -->
+      <ng-template #columnaContacto let-fila>
+        <div>{{ fila.correo }}</div>
+        <div>{{ fila.telefono }}</div>
+      </ng-template>
+
+      <!-- Columna 4: Botón Ver Aportes -->
+      <ng-template #columnaAccion let-fila>
+        <button class="btn-ver" (click)="irAVisualizarAportes(fila.cedula)">
+          Ver Aportes
+        </button>
+      </ng-template>
+
+    </app-tabla-dinamica>
+  </div>
+
+  <!-- Botón de volver -->
+  <img
+    src="/svg/reusables/flecha.svg"
+    class="flecha-volver"
+    (click)="volver()"
+    alt="Volver"
+  />
+
+  <!-- Decoradores -->
+  <div class="decorador-izq"></div>
+  <div class="decorador-der"></div>
+</div>

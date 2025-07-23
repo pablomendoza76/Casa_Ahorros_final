@@ -1,0 +1,54 @@
+// Paleta principal institucional
+$color-primario: #003366; // Azul UTPL
+$color-primario-claro: #ffffff; // Azul UTPL
+$color-primario-hover: #002244;
+$color-primario-ios: #007AFF; // Azul estándar iOS
+$color-secundario: #002f6c;
+$color-secundario-ios: #5AC8FA; // Azul secundario iOS
+
+// Colores neutrales
+$color-blanco: #ffffff;
+$color-gris-claro: #e2e2e2;
+$color-gris-medio: #ccc;
+$color-gris-oscuro: #888;
+$color-gris-oscuro-ios: #8E8E93; // Gris iOS estándar
+$color-texto-label: #444;
+$color-texto-oscuro-ios: #1C1C1E; // Texto oscuro iOS
+$color-footer: #666;
+
+// Colores de fondo
+$color-fondo-ios: #F2F2F7; // Fondo estándar iOS
+$color-fondo-descripcion-ios: #F7F7F7;
+$color-fondo-panel-ios: #F7F7F7;
+$color-fondo-avatar-ios: #E3E3E8;
+$color-fondo-icono-social: #EFF0F3;
+$color-fondo-icono-social-hover: #E5E5EA;
+
+// Colores de bordes
+$color-borde-ios: rgba(0, 0, 0, 0.1);
+$color-borde-avatar-ios: rgba(0, 0, 0, 0.05);
+$color-borde-descripcion-ios: rgba(0, 0, 0, 0.05);
+$color-borde-panel-ios: rgba(0, 0, 0, 0.08);
+$color-borde-popup-ios: rgba(0, 0, 0, 0.1);
+
+// Colores de separadores
+$color-separador-ios: rgba(0, 0, 0, 0.1);
+$color-separador-lista-ios: rgba(60, 60, 67, 0.15);
+
+// Sombras
+$sombra-suave: 0 0 1.875rem rgba(0, 0, 0, 0.06);
+$sombra-suave-ios: 0 1px 3px rgba(0, 0, 0, 0.1);
+$sombra-fuerte: 0 0 2rem rgba(0, 0, 0, 0.2);
+$sombra-fuerte-ios: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+// Colores de estado
+$color-exito: #28a745;
+$color-exito-ios: #34C759; // Verde iOS
+$color-error: #dc3545;
+$color-error-ios: #FF3B30; // Rojo iOS
+$color-amarillo: #EFB810;
+$color-amarillo-ios: #FFCC00; // Amarillo iOS
+$color-amarillo-dorado: #bd9909;
+
+// Colores adicionales para iconos
+$color-icono-avatar: #8E8E93;

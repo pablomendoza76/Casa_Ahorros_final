@@ -1,0 +1,108 @@
+<div class="perfil-container">
+  <!-- Panel lateral de opciones -->
+  <div class="menu-lateral">
+    <!-- Opción Perfil -->
+    <div
+      class="opcion"
+      [ngClass]="{ 'activa': !modoEdicion }">
+      <div class="opcion-icono">
+        <span>Perfil</span>
+        <img src="/svg/perfil/user-icon.svg" alt="Perfil" />
+      </div>
+    </div>
+
+    <!-- Opción Editar Perfil -->
+    <div
+      class="opcion"
+      [ngClass]="{ 'activa': modoEdicion }"
+      (click)="activarEdicion()">
+      <div class="opcion-icono">
+        <span>Editar perfil</span>
+        <img src="/svg/perfil/edit.svg" alt="Editar" />
+      </div>
+    </div>
+
+    <div class="configuracion">Configuración</div>
+  </div>
+
+  <!-- Cabecera principal -->
+  <div class="contenido-perfil">
+    <!-- Icono usuario + saludo + X -->
+    <div class="acciones-superior">
+      <div class="usuario-saludo">
+        <img src="/svg/inicio/BotonPerfil.svg" alt="Usuario" class="icono-usuario" />
+        <span>Hola, {{ socio?.nombre }}</span>
+      </div>
+      <img src="/svg/perfil/equis.svg" alt="Cerrar" class="icono-cerrar" (click)="volver()" />
+    </div>
+
+    <h1 class="titulo">Mi Perfil</h1>
+
+    <!-- Avatar + nombre + descripción + redes -->
+    <div class="perfil-usuario">
+      <ng-container *ngIf="socio?.foto && imagenValida !== false; else svgFallback">
+        <img
+          [src]="socio.foto"
+          alt="Avatar Usuario"
+          class="avatar"
+          (error)="imagenValida = false"
+        />
+      </ng-container>
+
+      <ng-template #svgFallback>
+        <div class="svg-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="#ccc">
+            <circle cx="12" cy="8" r="4" />
+            <path d="M4 20c0-4 4-6 8-6s8 2 8 6" />
+          </svg>
+        </div>
+      </ng-template>
+
+      <div class="datos-nombre">
+        <h2>{{ socio?.nombre }} {{ socio?.apellido }}</h2>
+        <p class="descripcion">Docente de la Facultad de Ingenierías y Arquitectura</p>
+
+        <div class="iconos-sociales">
+          <img src="/svg/perfil/x.svg" alt="X" />
+          <img src="/svg/perfil/facebook.svg" alt="Facebook" />
+          <img src="/svg/perfil/mdi.svg" alt="LinkedIn" />
+        </div>
+      </div>
+    </div>
+
+    <hr class="linea-separadora" />
+
+    <!-- Detalles del socio -->
+    <div class="detalle">
+      <p><strong>Nombre completo:</strong> {{ socio?.nombre }} {{ socio?.apellido }}</p>
+      <p><strong>Usuario:</strong> {{ socio?.identificacion }}</p>
+      <p><strong>Email:</strong> {{ socio?.correo }}</p>
+      <p><strong>Teléfono:</strong> {{ socio?.telefono }}</p>
+    </div>
+
+    <img src="/svg/reusables/flecha.svg" class="flecha-volver" (click)="volver()" />
+  </div>
+
+  <!-- Formulario dentro de un Popup Modal -->
+  <div *ngIf="modoEdicion" class="popup-edicion">
+    <div class="popup-contenido">
+      <app-formulario-reutilizable
+        [tituloFormulario]="'Editar Perfil'"
+        [campos]="camposFormulario"
+        textoBotonIzquierdo="Guardar"
+        textoBotonDerecho="Cancelar"
+        (onSubmit)="guardarCambios($event)"
+        (onSecundario)="cancelar()">
+      </app-formulario-reutilizable>
+    </div>
+    <div class="popup-overlay" (click)="cancelar()"></div>
+  </div>
+
+  <!-- Popup mensajes -->
+  <app-popup-mensaje
+    *ngIf="mensajeVisible"
+    [tipo]="tipoMensaje"
+    [mensaje]="mensajeTexto"
+    (cerrar)="cerrarMensaje()">
+  </app-popup-mensaje>
+</div>

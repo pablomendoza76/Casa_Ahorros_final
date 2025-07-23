@@ -1,0 +1,48 @@
+<div class="prestamos-layout">
+  <!-- Menú lateral -->
+  <menu-reusable [opciones]="menuOpciones"></menu-reusable>
+
+  <!-- Contenido principal -->
+  <main class="contenido-prestamos">
+    <!-- Encabezado -->
+    <div class="encabezado-prestamos">
+      <h1>Préstamos del Socio</h1>
+      <button class="btn-crear" (click)="abrirModal()">Crear nuevo préstamo</button>
+    </div>
+
+    <!-- Tarjetas de préstamos -->
+    <div class="contenedor-prestamos">
+      <ng-container *ngIf="prestamos.length > 0; else sinPrestamos">
+        <div class="tarjeta-prestamo" *ngFor="let p of prestamos">
+          <h3>{{ p.tipo || 'Préstamo' }}</h3>
+          <p><strong>Monto:</strong> {{ p.monto }}</p>
+          <p><strong>Saldo restante:</strong> {{ p.saldo_restante }}</p>
+          <p><strong>Plazo:</strong> {{ p.plazo }}</p>
+          <p><strong>Estado:</strong> {{ p.estado }}</p>
+        </div>
+      </ng-container>
+
+      <ng-template #sinPrestamos>
+        <div class="tarjeta-vacia">
+          <span class="material-symbols-outlined">info</span>
+          <p>No hay préstamos aún.</p>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Modal personalizado -->
+    <div class="popup-overlay" *ngIf="modalVisible">
+      <div class="popup-card">
+        <span class="cerrar-popup" (click)="cerrarModal()">×</span>
+
+        <app-formulario-reutilizable
+          [campos]="camposFormulario"
+          [tituloFormulario]="'Nuevo Préstamo'"
+          textoBotonIzquierdo="Guardar"
+          textoBotonDerecho="Cancelar"
+          (onSubmit)="onGuardarPrestamo($event)">
+        </app-formulario-reutilizable>
+      </div>
+    </div>
+  </main>
+</div>
