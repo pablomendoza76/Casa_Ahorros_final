@@ -14,6 +14,7 @@
       [filas]="prestamos"
       [configuracionColumnas]="columnas"
       [mostrarEncabezado]="true"
+      (filaClick)="abrirModal($event)"
     >
       <ng-template #nombreTpl let-prestamo>
         {{ prestamo.nombre_completo }}
@@ -45,7 +46,7 @@
       </ng-template>
 
       <ng-template #fechaTpl let-prestamo>
-        {{ prestamo.fecha_aprobacion }}
+        {{ prestamo.fecha_solicitud }}
       </ng-template>
     </app-tabla-dinamica>
   </div>
@@ -56,6 +57,28 @@
     (click)="volver()"
     alt="Volver"
   />
+
+ 
+  <!-- 🎯 Modal personalizado -->
+<div class="modal-overlay" *ngIf="modalAbierto">
+  <div class="modal-contenido">
+    <div class="modal-encabezado">
+      <h3>Información del Préstamo</h3>
+      <button class="cerrar-modal" (click)="cerrarModal()">✖</button>
+    </div>
+
+    <app-formulario-reutilizable
+  [campos]="camposFormulario"
+  [tituloFormulario]="'Detalle del Préstamo'"
+  textoBotonPrimario="Aceptar"
+  textoBotonDerecho="Rechazar"
+  (onPrimario)="aprobarPrestamo()"
+  (onSecundario)="rechazarPrestamo()"
+></app-formulario-reutilizable>
+
+  </div>
+</div>
+
 
   <div class="decorador-izq"></div>
   <div class="decorador-der"></div>

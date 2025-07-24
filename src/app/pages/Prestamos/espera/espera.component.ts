@@ -13,19 +13,28 @@ import { TablaDinamicaComponent } from '../../../shared/components/tabla-dinamic
 import { PrestamoService } from '../../../services/prestamos.service/prestamo.service';
 import { PrestamosMapper } from '../../../mapping/prestamos.mapper';
 import { ConfiguracionColumna } from '../../../shared/components/tabla-dinamica/ConfiguracionColumna.model';
-
-
+import { FormularioReutilizableComponent } from '../../../shared/components/formulario-reutilizable/formulario-reutilizable.component';
 
 @Component({
   selector: 'app-espera',
-  imports: [CommonModule, TablaDinamicaComponent, MatIconModule],
+  standalone: true,
+  imports: [
+    CommonModule,
+    TablaDinamicaComponent,
+    MatIconModule,
+    FormularioReutilizableComponent,
+  ],
   templateUrl: './espera.component.html',
   styleUrl: './espera.component.scss'
 })
-
 export class EsperaComponent implements OnInit, AfterViewInit {
   prestamos: any[] = [];
   columnas: ConfiguracionColumna[] = [];
+
+  // Modal
+  modalAbierto: boolean = false;
+  prestamoSeleccionado: any = null;
+  camposFormulario: any[] = [];
 
   @ViewChild('nombreTpl') nombreTpl!: TemplateRef<any>;
   @ViewChild('infoTpl') infoTpl!: TemplateRef<any>;
@@ -43,9 +52,7 @@ export class EsperaComponent implements OnInit, AfterViewInit {
   ) {}
 
   async ngOnInit(): Promise<void> {
-    this.prestamos = await PrestamosMapper.obtenerPrestamosPorEstado(this.prestamoService, 'en_espera');
-    console.log('📤 Datos enviados a la tabla dinámica:', this.prestamos);
-    this.cdr.detectChanges();
+    await this.cargarPrestamos();
   }
 
   ngAfterViewInit(): void {
@@ -65,5 +72,48 @@ export class EsperaComponent implements OnInit, AfterViewInit {
   volver(): void {
     this.router.navigate(['prestamos/inicio']);
   }
-}
 
+  async cargarPrestamos(): Promise<void> {
+    this.prestamos = await PrestamosMapper.obtenerPrestamosPorEstado(this.prestamoService, 'en_espera');
+    this.cdr.detectChanges();
+  }
+
+  abrirModal(prestamo: any): void {
+    this.prestamoSeleccionado = prestamo;
+    this.camposFormulario = [
+      { key: 'nombre_completo', label: 'Nombre Completo', tipo: 'texto', value: prestamo.nombre_completo, deshabilitado: true },
+      { key: 'correo', label: 'Correo Electrónico', tipo: 'texto', value: prestamo.correo, deshabilitado: true },
+      { key: 'telefono', label: 'Teléfono', tipo: 'texto', value: prestamo.telefono, deshabilitado: true },
+      { key: 'monto', label: 'Monto Solicitado', tipo: 'numero', value: prestamo.monto, deshabilitado: true },
+      { key: 'interes', label: 'Interés (%)', tipo: 'numero', value: prestamo.interes, deshabilitado: true },
+      { key: 'plazo', label: 'Plazo (meses)', tipo: 'numero', value: prestamo.plazo, deshabilitado: true },
+    ];
+    this.modalAbierto = true;
+  }
+
+  cerrarModal(): void {
+    this.modalAbierto = false;
+    this.prestamoSeleccionado = null;
+    this.camposFormulario = [];
+  }
+
+  async aprobarPrestamo(): Promise<void> {
+    console.log('Aprobando préstamo:', this.prestamoSeleccionado);
+    if (this.prestamoSeleccionado?.id) {
+      await this.actualizarEstado(this.prestamoSeleccionado.id, 'aceptado');
+      this.cerrarModal();
+    }
+  }
+
+  async rechazarPrestamo(): Promise<void> {
+    if (this.prestamoSeleccionado?.id) {
+      await this.actualizarEstado(this.prestamoSeleccionado.id, 'rechazado');
+      this.cerrarModal();
+    }
+  }
+
+  private async actualizarEstado(id: number, nuevoEstado: string): Promise<void> {
+    await this.prestamoService.cambiarEstadoPrestamo(id, nuevoEstado as any);
+    await this.cargarPrestamos();
+  }
+}

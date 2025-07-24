@@ -20,20 +20,140 @@ menu-reusable {
 }
 
 .contenido-inicio {
-  margin-left: 0;
-  width: 100%;
-  padding: 4vw;
-  padding-bottom: 10vh;
-  background-color: #f2f5f9;
-  box-sizing: border-box;
-
-  // 👉 Hacemos que el contenido debajo del menú sea scrollable
-  position: relative;
-  height: calc(100vh - 72px); // Altura total menos el alto del menú móvil (aprox. 56px + margen)
+  margin-left: $ancho-menu;
+  width: calc(100% - #{$ancho-menu});
+  padding: 2rem;
+  min-height: 100vh;
   overflow-y: auto;
-  scroll-behavior: smooth;
-}
+  position: relative;
 
+  .barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .titulo-principal {
+      font-size: 2.4rem;
+      font-weight: bold;
+      color: #00387d;
+      margin: 0;
+    }
+
+    .acciones-superior {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .icono-usuario {
+        background-color: #00387d;
+        color: white;
+        border-radius: 50%;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+      }
+
+      .btn-salir {
+        background-color: white;
+        color: #00387d;
+        border: 1px solid #00387d;
+        padding: 0.4rem 1.2rem;
+        font-weight: 500;
+        border-radius: 2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background-color: #00387d;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .encabezado-estado {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2rem;
+    position: relative;
+
+    .avatar-usuario {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background-color: $color-gris-claro;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      color: $color-primario;
+      box-shadow: $sombra-suave;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+
+    .datos-usuario {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .saldo-disponible {
+        display: none !important;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        margin: 0;
+        color: #000;
+      }
+
+      .cargo {
+        font-size: 1rem;
+        color: #666;
+        margin: 0.5rem 0 1.2rem;
+        line-height: 1.4;
+      }
+
+      .linea-divisoria {
+        border: none;
+        height: 1px;
+        background-color: #f3cc76;
+        margin: 1rem 0;
+      }
+
+      .info-clave {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        font-size: 1rem;
+        color: #000;
+
+        div {
+          display: flex;
+          justify-content: space-between;
+          max-width: 450px;
+
+          strong {
+            color: #000;
+            font-weight: 600;
+            width: 160px;
+          }
+        }
+      }
+    }
+  }
+}
 
 .tabla-movimientos {
   margin-top: 2rem;

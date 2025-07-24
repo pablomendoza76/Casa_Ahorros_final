@@ -11,12 +11,16 @@ import { CommonModule } from '@angular/common';
 })
 export class FormularioReutilizableComponent implements OnInit {
   @Input() campos: any[] = [];
-  @Input() textoBotonIzquierdo = 'Crear';
+  @Input() textoBotonIzquierdo = '';
   @Input() textoBotonDerecho = 'Lista Usuarios';
   @Input() tituloFormulario = 'Formulario';
+  @Input() textoBotonPrimario = '';
+
 
   @Output() onSubmit = new EventEmitter<any>();
   @Output() onSecundario = new EventEmitter<void>();
+  @Output() onPrimario = new EventEmitter<void>();
+
 
   formulario!: FormGroup;
 
@@ -85,4 +89,15 @@ export class FormularioReutilizableComponent implements OnInit {
       }
     });
   }
+
+
+  onArchivoSeleccionado(event: Event, campo: any): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const archivo = input.files[0];
+    this.formulario.get(campo.key)?.setValue(archivo);
+    this.ejecutarOnChange(campo); // si necesitas reaccionar al cambio
+  }
+}
+
 }
